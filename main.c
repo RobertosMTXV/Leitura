@@ -4,11 +4,11 @@
 #include "funcoes.h"
 
 void mostrarMenu() {
-    printf("Menu:\n");
+    printf("\nMenu:\n");
     printf("1. Inserir um texto\n");
-    printf("2. Apagar o conteúdo do arquivo\n");
+    printf("2. Apagar o conteudo do arquivo\n");
     printf("3. Listar palavras diferentes\n");
-    printf("4. Contar ocorrências de uma palavra\n");
+    printf("4. Contar ocorrencias de uma palavra\n");
     printf("5. Visualizar titulos de textos registrados\n");
     printf("6. Sair\n");
     printf("Escolha uma opcao: ");
