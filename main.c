@@ -5,12 +5,12 @@
 
 void mostrarMenu() {
     printf("\nMenu:\n");
-    printf("1. Inserir um texto\n");
-    printf("2. Apagar o conteudo do arquivo\n");
-    printf("3. Listar palavras diferentes\n");
-    printf("4. Contar ocorrencias de uma palavra\n");
-    printf("5. Visualizar titulos de textos registrados\n");
-    printf("6. Sair\n");
+    printf("[1] Inserir um texto\n");
+    printf("[2] Apagar o conteudo do arquivo\n");
+    printf("[3] Listar palavras diferentes\n");
+    printf("[4] Contar ocorrencias de uma palavra\n");
+    printf("[5] Visualizar titulos de textos registrados\n");
+    printf("[0] Sair\n");
     printf("Escolha uma opcao: ");
 }
 
@@ -99,8 +99,7 @@ int main() {
             case 5:
                 visualizarTitulos(nomeArquivo);
                 break;
-            case 6:
-                printf("Saindo...\n");
+            case 0:
                 exit(0);
             default:
                 printf("Opcao invalida! Tente novamente.\n");

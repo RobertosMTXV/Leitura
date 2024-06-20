@@ -25,14 +25,16 @@ void lerArquivo(const char *nomeArquivo, char *conteudo) {
 }
 
 void listarPalavrasDiferentes(char *texto) {
-    char *palavras[maximoPalavra];
+    char *palavras[maximoPalavra] = {0};
     int numPalavras = 0;
     char palavra[palavraMaximoTamanho];
     int i = 0, j = 0;
 
     while (texto[i] != '\0') {
         if (isalpha(texto[i])) { // Verifica se é uma letra
-            palavra[j++] = tolower(texto[i]);
+            if (j < palavraMaximoTamanho - 1) {
+                palavra[j++] = tolower(texto[i]);
+            }
         } else if (j > 0) {
             palavra[j] = '\0';
             int numVogais = contarVogais(palavra);
@@ -42,9 +44,11 @@ void listarPalavrasDiferentes(char *texto) {
                     break; // Palavra já existe na lista
                 }
             }
-            if (k == numPalavras) {
+            if (k == numPalavras && numPalavras < maximoPalavra) {
                 palavras[numPalavras] = strdup(palavra);
-                numPalavras++;
+                if (palavras[numPalavras] != NULL) {
+                    numPalavras++;
+                }
             }
             j = 0;
         }
@@ -60,9 +64,11 @@ void listarPalavrasDiferentes(char *texto) {
                 break; // Palavra já existe na lista
             }
         }
-        if (k == numPalavras) {
+        if (k == numPalavras && numPalavras < maximoPalavra) {
             palavras[numPalavras] = strdup(palavra);
-            numPalavras++;
+            if (palavras[numPalavras] != NULL) {
+                numPalavras++;
+            }
         }
     }
 

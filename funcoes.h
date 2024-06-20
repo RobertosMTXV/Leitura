@@ -9,5 +9,5 @@ void lerArquivo(const char *nomeArquivo, char *conteudo);
 void listarPalavrasDiferentes(char *texto);
 int contarOcorrencias(char *texto, const char *palavraBuscada);
 
-#endif // FUNCOES_H_INCLUDED
+#endif
 
