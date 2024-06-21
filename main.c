@@ -3,9 +3,11 @@
 #include <string.h>
 #include "funcoes.h"
 
+#define MAX_CARACTERES 1001 // Adicionamos 1 para incluir o caractere nulo '\0'
+
 void mostrarMenu() {
     printf("Menu:\n");
-    printf("1. Inserir um texto\n");
+    printf("1. Inserir um texto (limite 1000 caracteres)\n");
     printf("2. Apagar o conteúdo do arquivo\n");
     printf("3. Listar palavras diferentes\n");
     printf("4. Contar ocorrências de uma palavra\n");
@@ -20,20 +22,25 @@ void inserirTexto(const char *nomeArquivo) {
         printf("Erro ao abrir o arquivo.\n");
         return;
     }
-    
-    char linha[caracteresMaximo];
 
-    printf("Digite o texto (finalize com uma linha vazia):\n");
-    
+    char linha[MAX_CARACTERES];
+
+    printf("Digite o texto (limite de 1000 caracteres, finalize com uma linha vazia):\n");
+
     while (1) {
-        fgets(linha, caracteresMaximo, stdin);
+        fgets(linha, sizeof(linha), stdin);
         if (strcmp(linha, "\n") == 0) {
+            fprintf(arquivo, "\n"); // Adiciona uma linha em branco após o texto
             break;
+        }
+        if (strlen(linha) > MAX_CARACTERES - 1) { // -1 para deixar espaço para o caractere nulo
+            printf("O texto excede o limite de 1000 caracteres.\n");
+            fclose(arquivo);
+            return;
         }
         fprintf(arquivo, "%s", linha);
     }
 
-    fprintf(arquivo, "\n"); // Adiciona uma linha em branco após o texto
     fclose(arquivo);
 }
 
@@ -54,7 +61,7 @@ void visualizarTextos(const char *nomeArquivo) {
         return;
     }
 
-    char linha[caracteresMaximo];
+    char linha[MAX_CARACTERES];
     printf("Textos registrados:\n");
     while (fgets(linha, sizeof(linha), arquivo) != NULL) {
         printf("%s", linha);
@@ -63,7 +70,7 @@ void visualizarTextos(const char *nomeArquivo) {
 }
 
 int main() {
-    char conteudo[caracteresMaximo];
+    char conteudo[MAX_CARACTERES];
     char palavraBuscada[palavraMaximoTamanho];
     int opcao;
     const char *nomeArquivo = "texto.txt";
