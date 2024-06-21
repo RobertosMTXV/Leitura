@@ -4,14 +4,14 @@
 #include "funcoes.h"
 
 void mostrarMenu() {
-    printf("\nMenu:\n");
-    printf("[1] Inserir um texto\n");
-    printf("[2] Apagar o conteudo do arquivo\n");
-    printf("[3] Listar palavras diferentes\n");
-    printf("[4] Contar ocorrencias de uma palavra\n");
-    printf("[5] Visualizar titulos de textos registrados\n");
-    printf("[0] Sair\n");
-    printf("Escolha uma opcao: ");
+    printf("Menu:\n");
+    printf("1. Inserir um texto\n");
+    printf("2. Apagar o conteúdo do arquivo\n");
+    printf("3. Listar palavras diferentes\n");
+    printf("4. Contar ocorrências de uma palavra\n");
+    printf("5. Visualizar textos registrados\n");
+    printf("6. Sair\n");
+    printf("Escolha uma opção: ");
 }
 
 void inserirTexto(const char *nomeArquivo) {
@@ -21,25 +21,19 @@ void inserirTexto(const char *nomeArquivo) {
         return;
     }
     
-    char titulo[palavraMaximoTamanho];
-    char texto[caracteresMaximo];
+    char linha[caracteresMaximo];
 
-    printf("Digite o titulo: ");
-    scanf(" %[^\n]", titulo);
-    getchar();  // Limpar o buffer do stdin
     printf("Digite o texto (finalize com uma linha vazia):\n");
     
-    fprintf(arquivo, "%s\n", titulo);
-
     while (1) {
-        fgets(texto, caracteresMaximo, stdin);
-        if (strcmp(texto, "\n") == 0) {
+        fgets(linha, caracteresMaximo, stdin);
+        if (strcmp(linha, "\n") == 0) {
             break;
         }
-        fprintf(arquivo, "%s", texto);
+        fprintf(arquivo, "%s", linha);
     }
 
-    fprintf(arquivo, "\n"); // Adiciona uma linha em branco ap�s o texto
+    fprintf(arquivo, "\n"); // Adiciona uma linha em branco após o texto
     fclose(arquivo);
 }
 
@@ -50,20 +44,20 @@ void apagarConteudo(const char *nomeArquivo) {
         return;
     }
     fclose(arquivo);
-    printf("Conte�do do arquivo apagado.\n");
+    printf("Conteúdo do arquivo apagado.\n");
 }
 
-void visualizarTitulos(const char *nomeArquivo) {
+void visualizarTextos(const char *nomeArquivo) {
     FILE *arquivo = fopen(nomeArquivo, "r");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         return;
     }
 
-    char linha[palavraMaximoTamanho];
-    printf("Titulos de textos registrados:\n");
-    while (fgets(linha, palavraMaximoTamanho, arquivo) != NULL) {
-        printf("- %s", linha);
+    char linha[caracteresMaximo];
+    printf("Textos registrados:\n");
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+        printf("%s", linha);
     }
     fclose(arquivo);
 }
@@ -97,15 +91,15 @@ int main() {
                 printf("A palavra '%s' aparece %d vezes no texto.\n", palavraBuscada, contarOcorrencias(conteudo, palavraBuscada));
                 break;
             case 5:
-                visualizarTitulos(nomeArquivo);
+                visualizarTextos(nomeArquivo);
                 break;
-            case 0:
+            case 6:
+                printf("Saindo...\n");
                 exit(0);
             default:
-                printf("Opcao invalida! Tente novamente.\n");
+                printf("Opção inválida! Tente novamente.\n");
         }
     }
 
     return 0;
 }
-
