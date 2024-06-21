@@ -11,7 +11,7 @@ int palavraExiste(char *palavras[], int numPalavras, const char *palavra) {
             return 1; // Palavra encontrada na lista
         }
     }
-    return 0; // Palavra não encontrada na lista
+    return 0; // Palavra nao encontrada na lista
 }
 
 void lerArquivo(const char *nomeArquivo, char *conteudo) {
