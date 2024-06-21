@@ -11,7 +11,7 @@ int palavraExiste(char *palavras[], int numPalavras, const char *palavra) {
             return 1; // Palavra encontrada na lista
         }
     }
-    return 0; // Palavra n„o encontrada na lista
+    return 0; // Palavra n√£o encontrada na lista
 }
 
 void lerArquivo(const char *nomeArquivo, char *conteudo) {
@@ -25,30 +25,26 @@ void lerArquivo(const char *nomeArquivo, char *conteudo) {
 }
 
 void listarPalavrasDiferentes(char *texto) {
-    char *palavras[maximoPalavra] = {0};
+    char *palavras[maximoPalavra];
     int numPalavras = 0;
     char palavra[palavraMaximoTamanho];
     int i = 0, j = 0;
 
     while (texto[i] != '\0') {
-        if (isalpha(texto[i])) { // Verifica se È uma letra
-            if (j < palavraMaximoTamanho - 1) {
-                palavra[j++] = tolower(texto[i]);
-            }
+        if (isalpha(texto[i])) { // Verifica se √© uma letra
+            palavra[j++] = tolower(texto[i]);
         } else if (j > 0) {
             palavra[j] = '\0';
             int numVogais = contarVogais(palavra);
             int k;
             for (k = 0; k < numPalavras; k++) {
                 if (contarVogais(palavras[k]) == numVogais && strcmp(palavra, palavras[k]) == 0) {
-                    break; // Palavra j· existe na lista
+                    break; // Palavra j√° existe na lista
                 }
             }
-            if (k == numPalavras && numPalavras < maximoPalavra) {
+            if (k == numPalavras) {
                 palavras[numPalavras] = strdup(palavra);
-                if (palavras[numPalavras] != NULL) {
-                    numPalavras++;
-                }
+                numPalavras++;
             }
             j = 0;
         }
@@ -61,21 +57,19 @@ void listarPalavrasDiferentes(char *texto) {
         int k;
         for (k = 0; k < numPalavras; k++) {
             if (contarVogais(palavras[k]) == numVogais && strcmp(palavra, palavras[k]) == 0) {
-                break; // Palavra j· existe na lista
+                break; // Palavra j√° existe na lista
             }
         }
-        if (k == numPalavras && numPalavras < maximoPalavra) {
+        if (k == numPalavras) {
             palavras[numPalavras] = strdup(palavra);
-            if (palavras[numPalavras] != NULL) {
-                numPalavras++;
-            }
+            numPalavras++;
         }
     }
 
     printf("Palavras diferentes encontradas:\n");
     for (i = 0; i < numPalavras; i++) {
         printf("%s\n", palavras[i]);
-        free(palavras[i]);  // Libera a memÛria alocada por strdup
+        free(palavras[i]);  // Libera a mem√≥ria alocada por strdup
     }
 }
 
@@ -97,7 +91,7 @@ int contarOcorrencias(char *texto, const char *palavraBuscada) {
     int i = 0, j = 0;
 
     while (texto[i] != '\0') {
-        if (isalpha(texto[i])) { // Verifica se È uma letra
+        if (isalpha(texto[i])) { // Verifica se √© uma letra
             palavra[j++] = tolower(texto[i]);
         } else if (j > 0) {
             palavra[j] = '\0';
@@ -118,4 +112,3 @@ int contarOcorrencias(char *texto, const char *palavraBuscada) {
 
     return count;
 }
-
