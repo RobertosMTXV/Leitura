@@ -8,12 +8,12 @@
 void mostrarMenu() {
     printf("Menu:\n");
     printf("1. Inserir um texto (limite 1000 caracteres)\n");
-    printf("2. Apagar o conteúdo do arquivo\n");
+    printf("2. Apagar o conteudo do arquivo\n");
     printf("3. Listar palavras diferentes\n");
-    printf("4. Contar ocorrências de uma palavra\n");
+    printf("4. Contar ocorrencias de uma palavra\n");
     printf("5. Visualizar textos registrados\n");
     printf("6. Sair\n");
-    printf("Escolha uma opção: ");
+    printf("Escolha uma opcao: ");
 }
 
 void inserirTexto(const char *nomeArquivo) {
@@ -51,7 +51,7 @@ void apagarConteudo(const char *nomeArquivo) {
         return;
     }
     fclose(arquivo);
-    printf("Conteúdo do arquivo apagado.\n");
+    printf("Conteudo do arquivo apagado.\n");
 }
 
 void visualizarTextos(const char *nomeArquivo) {
@@ -104,7 +104,7 @@ int main() {
                 printf("Saindo...\n");
                 exit(0);
             default:
-                printf("Opção inválida! Tente novamente.\n");
+                printf("Opcao invalida! Tente novamente.\n");
         }
     }
 
